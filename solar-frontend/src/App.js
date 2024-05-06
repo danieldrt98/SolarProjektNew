@@ -34,6 +34,7 @@ function App() {
             <p>Wind: {weatherData.wind.speed} m/s</p>
             <p>Sunrise: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</p>
             <p>Sunset: {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</p>
+            <p>Forecast: </p>
           </div>
         )}
       </header>
