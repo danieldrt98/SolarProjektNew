@@ -19,15 +19,17 @@ const GEO_API_OPTIONS = {
 };
 
 
-//const lat = 49.233333333;
-//const lon = 7;
+const lat = 49.233333333;
+const lon = 7;
 
 //das würde ich nicht nutzen weil ich es nicht kenne. #BinEinBauer
-app.get("/api/weather", async (req, res) => {
+app.get("/weather", async (req, res) => {
+  console.log("Handling /weather request"); 
   try {
     const weatherResponse = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
     );
+    console.log("weatherResponse API: ", weatherResponse.data);
     res.send(weatherResponse.data);
   } catch (error) {
     console.error(error);
@@ -35,7 +37,7 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
-export async function fetchWeatherData(lat, lon){
+async function fetchWeatherData(lat, lon){
   try {
     const response = await axios.get(
       `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
@@ -52,7 +54,7 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-export async function fetchCities(input) {
+async function fetchCities(input) {
   try {
     const response = await fetch(
       `${GEO_API_URL}/cities?minPopulation=10000&namePrefix=${input}`,
@@ -67,7 +69,7 @@ export async function fetchCities(input) {
   }
 }
 
-export async function fetchSunDurationOneWeek(lat, lon) {
+async function fetchSunDurationOneWeek(lat, lon) {
   console.log("fetchSunDurationOneWeek entered with lat: ", lat);
   console.log("fetchSunDurationOneWeek entered with lon: ", lon);
   console.log("sunduration API URL: ", `${SUNDURATION_API_URL}/v1/forecast?latitude=${lat}&longitude=${lon}&daily=sunshine_duration`);

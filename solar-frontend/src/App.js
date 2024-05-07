@@ -15,7 +15,7 @@ function App() {
   const [weekForecast, setWeekForecast] = useState(null);
   const [sunDuration, setSunDurationData] = useState(null);
   const [error, setError] = useState(false);  
-  
+
   const searchChangeHandler = async (enteredData) => {
     const [latitude, longitude] = enteredData.value.split(' ');
 
@@ -57,9 +57,9 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await axios.get("/api/weather");
+        const response = await axios.get("/weather");
         setWeatherData(response.data);
-        console.log(response.data);
+        console.log("api return App.js: ",response.data);
       } catch (error) {
         console.error(error);
       }
